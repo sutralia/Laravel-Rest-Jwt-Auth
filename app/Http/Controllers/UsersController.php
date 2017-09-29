@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use JWTAuth;
 use App\User;
 use JWTAuthException;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -26,10 +27,11 @@ class UsersController extends Controller
     // }
 
     public function register(Request $request){
+        $password = Hash::make($request->get('password'));
         $user=$this->user->create([
             'name'=>$request->get('name'),
             'email'=>$request->get('email'),
-            'password'=>$request->get('password')
+            'password'=>$password
             ]);
         return response()->json(['status'=>true,'message'=>'user Created Succesfully','data'=>$user]);
 
