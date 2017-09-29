@@ -17,5 +17,10 @@ Route::post('auth/login', 'UsersController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'UsersController@getAuthUser');
     Route::get('article','ArticlesController@getArticle');
+
+    //article
+    Route::post('article/getOne','ArticlesController@getOneArticle');
+    Route::post('article/update','ArticlesController@updateArticle');
+    Route::delete('article/delete','ArticlesController@articleDelete');
 });
 
